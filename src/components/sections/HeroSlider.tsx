@@ -206,7 +206,7 @@ export const HeroSlider: React.FC = () => {
 
           {/* Call to Action Buttons */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center pt-4 sm:pt-8 px-4"
+            className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center pt-4 md:pt-8 px-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -219,7 +219,7 @@ export const HeroSlider: React.FC = () => {
               >
                 <Button
                   size="lg"
-                  className="bg-white/95 text-gray-900 hover:bg-white w-full sm:w-[220px] px-8 py-4 font-medium border-0 shadow-2xl hover:shadow-white/20 transition-all duration-500 backdrop-blur-sm"
+                  className="bg-white/95 text-gray-900 hover:bg-white w-full md:w-auto px-8 py-4 font-medium border-0 shadow-2xl hover:shadow-white/20 transition-all duration-500 backdrop-blur-sm whitespace-nowrap"
                 >
                   Virtuální prohlídka
                 </Button>
@@ -234,7 +234,7 @@ export const HeroSlider: React.FC = () => {
               >
                 <Button
                   size="lg"
-                  className="bg-red-700 text-white hover:bg-red-800 w-full sm:w-[220px] px-8 py-4 font-medium border-0 shadow-2xl hover:shadow-red-900/30 transition-all duration-500"
+                  className="bg-red-700 text-white hover:bg-red-800 w-full md:w-auto px-8 py-4 font-medium border-0 shadow-2xl hover:shadow-red-900/30 transition-all duration-500 whitespace-nowrap"
                 >
                   Nezávazná poptávka
                 </Button>
