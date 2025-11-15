@@ -3,6 +3,7 @@ import { Layout } from '@/components/layout/Layout';
 import { About } from '@/components/sections/About';
 import { ServicesOverview } from '@/components/sections/ServicesOverview';
 import { ValuesSection } from '@/components/sections/ValuesSection';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
@@ -92,6 +93,13 @@ const ourValues = [
 export default function AboutPage() {
   return (
     <Layout>
+      {/* Breadcrumbs */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Breadcrumbs items={[{ label: 'O nás' }]} />
+        </div>
+      </div>
+
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">

@@ -1,6 +1,7 @@
 'use client';
 
 import { Layout } from '@/components/layout/Layout';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
@@ -87,6 +88,13 @@ export default function ServicesPage() {
 
   return (
     <Layout>
+      {/* Breadcrumbs */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Breadcrumbs items={[{ label: 'Služby' }]} />
+        </div>
+      </div>
+
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">

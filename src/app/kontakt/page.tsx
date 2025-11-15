@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Layout } from '@/components/layout/Layout';
 import { ContactForm } from '@/components/sections/ContactForm';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 // import { TeamSection } from '@/components/sections/TeamSection';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -28,6 +29,13 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <Layout>
+      {/* Breadcrumbs */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Breadcrumbs items={[{ label: 'Kontakt' }]} />
+        </div>
+      </div>
+
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">

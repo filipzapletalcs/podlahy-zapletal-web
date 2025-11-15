@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import { Layout } from '@/components/layout/Layout';
 import { ImageModal } from '@/components/ui/ImageModal';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
@@ -11,6 +12,7 @@ import { ParallaxSection } from '@/components/animations/ParallaxSection';
 import { StaggeredCards } from '@/components/animations/StaggeredCards';
 import { getImageUrl } from '@/config/cdn';
 import { CountingNumber } from '@/components/ui/CountingNumber';
+import { GallerySkeletonGrid } from '@/components/ui/SkeletonLoader';
 
 // Všechny fotky z galerie
 const galleryImages = [
@@ -199,14 +201,20 @@ const categories = [
 ];
 
 export default function GalleryPage() {
-  const [activeCategory, setActiveCategory] = useState('all');
   const [selectedImage, setSelectedImage] = useState<typeof galleryImages[0] | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
-  const filteredImages = useMemo(() => {
-    if (activeCategory === 'all') return galleryImages;
-    return galleryImages.filter(img => img.category === activeCategory);
-  }, [activeCategory]);
+  // Show all images (no filtering)
+  const filteredImages = galleryImages;
+
+  // Simulate image loading
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setImagesLoaded(true);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleImageClick = (image: typeof galleryImages[0], index: number) => {
     setSelectedImage(image);
@@ -232,6 +240,13 @@ export default function GalleryPage() {
 
   return (
     <Layout>
+      {/* Breadcrumbs */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Breadcrumbs items={[{ label: 'Galerie' }]} />
+        </div>
+      </div>
+
       {/* Hero Section */}
       <ParallaxSection offset={50}>
         <section className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -281,39 +296,20 @@ export default function GalleryPage() {
         </section>
       </ParallaxSection>
 
-      {/* Filter Section */}
-      <ScrollReveal direction="up" delay={0.2}>
-        <section id="galerie" className="py-12 bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
-                  activeCategory === category.id
-                    ? 'bg-red-700 text-white shadow-lg transform scale-105'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105'
-                }`}
-              >
-                {category.name}
-                <span className="ml-2 text-xs opacity-70">({category.count})</span>
-              </button>
-            ))}
-          </div>
-        </div>
-        </section>
-      </ScrollReveal>
 
       {/* Gallery Grid */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Bento Grid Layout */}
-          <StaggeredCards 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" 
-            staggerDelay={0.03}
-          >
-            {filteredImages.map((image, index) => {
+          {/* Show skeleton while loading */}
+          {!imagesLoaded ? (
+            <GallerySkeletonGrid count={12} />
+          ) : (
+            /* Bento Grid Layout */
+            <StaggeredCards
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+              staggerDelay={0.03}
+            >
+              {filteredImages.map((image, index) => {
               // Jednoduchý a pravidelný pattern velikostí
               const getCardHeight = (index: number) => {
                 // Každých 12 karet se opakuje pattern
@@ -366,14 +362,17 @@ export default function GalleryPage() {
                 </div>
               );
             })}
-          </StaggeredCards>
+            </StaggeredCards>
+          )}
 
           {/* Load More Button (placeholder) */}
-          <div className="text-center mt-16">
-            <button className="px-8 py-3 bg-red-700 text-white rounded-full hover:bg-red-800 transition-colors duration-300 font-medium">
-              Načíst další realizace
-            </button>
-          </div>
+          {imagesLoaded && (
+            <div className="text-center mt-16">
+              <button className="px-8 py-3 bg-red-700 text-white rounded-full hover:bg-red-800 transition-colors duration-300 font-medium">
+                Načíst další realizace
+              </button>
+            </div>
+          )}
         </div>
       </section>
 

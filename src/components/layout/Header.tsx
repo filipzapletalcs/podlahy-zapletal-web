@@ -129,12 +129,18 @@ export const Header: React.FC = () => {
             </div>
 
 
-            {/* CTA Button */}
+            {/* CTA Button with pulse animation */}
             <div className="hidden min-[1200px]:block">
               <Link href="/kontakt#kontaktni-formular">
-                <Button size="sm">
-                  Nezávazná poptávka
-                </Button>
+                <div className="relative">
+                  {/* Pulse ring */}
+                  <div className="absolute -inset-1 bg-red-600 rounded-lg opacity-75 animate-pulse blur"></div>
+
+                  {/* Button */}
+                  <Button size="sm" className="relative">
+                    Nezávazná poptávka
+                  </Button>
+                </div>
               </Link>
             </div>
 
