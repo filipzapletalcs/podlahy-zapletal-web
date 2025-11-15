@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { Layout } from '@/components/layout/Layout';
 import { ImageModal } from '@/components/ui/ImageModal';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
@@ -191,13 +191,6 @@ const galleryImages = [
     category: 'drevene',
     height: 'tall'
   }
-];
-
-const categories = [
-  { id: 'all', name: 'Všechny realizace', count: galleryImages.length },
-  { id: 'drevene', name: 'Dřevěné podlahy', count: galleryImages.filter(img => img.category === 'drevene').length },
-  { id: 'vinylove', name: 'Vinylové podlahy', count: galleryImages.filter(img => img.category === 'vinylove').length },
-  { id: 'laminatove', name: 'Laminátové podlahy', count: galleryImages.filter(img => img.category === 'laminatove').length }
 ];
 
 export default function GalleryPage() {

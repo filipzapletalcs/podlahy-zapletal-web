@@ -128,13 +128,6 @@ export const HeroSlider: React.FC = () => {
                 priority={index === 0}
                 quality={index === 0 ? 85 : 75}
                 sizes="100vw"
-                srcSet={`
-                  ${getOptimizedImageUrl(image.src, 640, 'webp')} 640w,
-                  ${getOptimizedImageUrl(image.src, 768, 'webp')} 768w,
-                  ${getOptimizedImageUrl(image.src, 1024, 'webp')} 1024w,
-                  ${getOptimizedImageUrl(image.src, 1200, 'webp')} 1200w,
-                  ${getOptimizedImageUrl(image.src, 1920, 'webp')} 1920w
-                `}
                 style={{
                   opacity: imagesLoaded[index] ? 1 : 0,
                   transition: 'opacity 0.3s ease-in-out'
